@@ -113,7 +113,7 @@ const Languages = () => {
                     Messages{" "}
                     <Button onClick={handleOpenAddNewMessage}>Add new message</Button>
                     {" "}
-                    <Button variant="info" onClick={handleRefreshMessages}>Refresh message</Button>
+                    <Button variant="info" onClick={handleRefreshMessages}>Refresh messages</Button>
                 </h2>
                 <div>
                     <Table striped bordered hover variant="light">
