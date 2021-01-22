@@ -41,6 +41,17 @@ export default (app) => {
         await refreshMessages();
         res.end();
     })
+
+    app.post("/register-messages", async (req, res) => {
+        const { messages } = req.body;
+        for (let [key, defaultMessage] of Object.entries(messages)) {
+            await Messages.update({ key }, {
+                key,
+                defaultMessage,
+            }, { upsert: true });
+        }
+        res.end();
+    })
 }
 
 const refreshMessages = async () => {
