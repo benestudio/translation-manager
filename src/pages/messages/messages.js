@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Jumbotron, Button, ButtonGroup, Modal, Form, Table } from "react-bootstrap";
 import api from "../../api";
+import CsvUploadButton from "../../components/Navbar/CsvUploadButton";
 
 const initialNewMessage = {
     key: "",
@@ -28,6 +29,7 @@ const Languages = () => {
     const [newMessage, setNewMessage] = useState(initialNewMessage);
     const [mode, setMode] = useState("create");
     const [isAddNewMessageOpen, setIsAddNewMessageOpen] = useState(false);
+
     const getLanguages = async () => {
         const result = await api.get("/languages")
         setLanguages(result.data);
@@ -106,6 +108,10 @@ const Languages = () => {
         }
     }
 
+    const handleCsvExport = async () => {
+        window.open("http://localhost:8080/csv", "_blank")
+    }
+
     return (
         <Jumbotron fluid>
             <Container>
@@ -114,6 +120,10 @@ const Languages = () => {
                     <Button onClick={handleOpenAddNewMessage}>Add new message</Button>
                     {" "}
                     <Button variant="info" onClick={handleRefreshMessages}>Refresh messages</Button>
+                    {" "}
+                    <Button onClick={handleCsvExport}>CSV Export</Button>
+                    {" "}
+                    <CsvUploadButton onUpload={getMessages} />
                 </h2>
                 <div>
                     <Table striped bordered hover variant="light">
