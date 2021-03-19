@@ -1,4 +1,4 @@
-import objectsToCsv from "objects-to-csv";
+import csvStringify from "csv-stringify";
 
 import csvParse from "csv-parse";
 
@@ -22,6 +22,19 @@ export const parseCSV = (csv) => {
 };
 
 export const convertToCSV = async (data) => {
-    const csv = new objectsToCsv(data);
-    return csv.toString(true, true);
+    const result = new Promise((resolve, reject) =>
+        csvStringify(
+            data,
+            {
+                header: true,
+            },
+            (err, records) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(records);
+            },
+        ),
+    );
+    return result;
 };
