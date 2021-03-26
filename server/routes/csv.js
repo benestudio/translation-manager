@@ -9,7 +9,7 @@ export default (app) => {
             key: message.key,
             ...message.messages
         }))
-
+        console.log(messageRows)
         const csv = await convertToCSV(messageRows)
         res.writeHead(200, {
             'Content-Type': 'application/octet-stream',
